@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="coloricon">#FD3B32</color>
     <color name="colorbg">#ffffff</color>
+    <color name="colortv">#000000</color>
 
 </resources>

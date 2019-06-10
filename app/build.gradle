@@ -19,6 +19,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -32,5 +36,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
+    implementation 'com.youth.banner:banner:1.4.10'
+    //最新版本
+    implementation 'org.jsoup:jsoup:1.12.1'
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation files('build/lib/httpclient-4.0.1.jar')
+    implementation 'com.solidfire.code.gson:gson:2.6.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+    implementation 'com.facebook.fresco:fresco:0.9.0'
+    implementation 'com.android.support:support-v4:27.1.1'
 }
