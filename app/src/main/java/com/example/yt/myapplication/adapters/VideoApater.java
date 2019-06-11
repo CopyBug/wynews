@@ -56,6 +56,7 @@ public class VideoApater extends BaseAdapter {
         }
         Glide.with(context).load(videoBeans.get(i).getImgurl()).into(viewHolder.img_item);
         viewHolder.tv_item.setText(videoBeans.get(i).getTv());
+
         return view;
     }
 

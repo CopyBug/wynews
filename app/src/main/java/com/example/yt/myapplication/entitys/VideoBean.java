@@ -13,8 +13,10 @@ public class VideoBean {
         this.tv = tv;
     }
 
-    public VideoBean(String imgurl) {
+    public VideoBean(String videourl, String imgurl, String tv) {
+        this.videourl = videourl;
         this.imgurl = imgurl;
+        this.tv = tv;
     }
 
     public String getVideourl() {

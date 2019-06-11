@@ -9,9 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.yt.myapplication.R;
+import com.example.yt.myapplication.entitys.VideoBean;
+
+import java.util.List;
 
 public class VideoFragment extends BaseFragment {
     private ListView listview;
+    private List<VideoBean> sp;
+
+
 
     @Nullable
     @Override
@@ -23,5 +29,16 @@ public class VideoFragment extends BaseFragment {
 
     private void initView(View view) {
         listview = (ListView) view.findViewById(R.id.listview);
+    }
+    private void initSpAadpter(){
+        AddShiping("https://music.163.com/video?id=58D10B3BF3CD5882987BBE3FE24066AE&userid=1878422880","林肯公园in the end大合唱","http://img.takungpao.com/2017/0803/20170803031552717.jpg");
+        AddShiping("https://music.163.com/video?id=06914A6A889D36D776167A53EFEDA708&userid=1878422880","英雄联盟全球总决赛主题曲现场版","http://img5.imgtn.bdimg.com/it/u=3319206768,881517281&fm=26&gp=0.jpg");
+
+    }
+
+    public void AddShiping(String videourl, String tv, String imgurl) {
+        VideoBean videoBean=new VideoBean(videourl,tv,imgurl);
+        sp.add(videoBean);
+
     }
 }
