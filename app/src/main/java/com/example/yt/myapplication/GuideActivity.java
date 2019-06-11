@@ -3,7 +3,6 @@ package com.example.yt.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.yt.myapplication.until.OffenUntil;
@@ -22,6 +21,7 @@ public class GuideActivity extends AppCompatActivity {
         OffenUntil.CancelActionBar(this);
         setContentView(R.layout.activity_guide);
         initView();
+
         init();
 
     }
@@ -35,7 +35,7 @@ public class GuideActivity extends AppCompatActivity {
                 GuideActivity.this.finish();
             }
         };
-        timer.schedule(timerTask,3000);
+        timer.schedule(timerTask,1000);
     }
 
     private void initView() {

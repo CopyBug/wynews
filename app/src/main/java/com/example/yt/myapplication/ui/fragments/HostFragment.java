@@ -1,10 +1,10 @@
 package com.example.yt.myapplication.ui.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,13 +95,13 @@ public class HostFragment extends BaseFragment implements View.OnClickListener {
         TuijianGedan_bean tuijianGedan_bean = new TuijianGedan_bean(imgurl, msg, bofan);
         gvitem.add(tuijianGedan_bean);
     }
-
+/*获取当天信息*/
     public void GetToday() {
         Calendar calendar = Calendar.getInstance();
         int i = calendar.get(Calendar.DAY_OF_MONTH);
         host_cal.setText(i + "");
     }
-
+/*轮播图*/
     private void initBanner() {
         imgurl = new ArrayList<>();
         imgurl.add("http://p1.music.126.net/v4tyuXfAVtIdXIxfb2gEIQ==/109951164137211940.jpg");
@@ -110,7 +110,6 @@ public class HostFragment extends BaseFragment implements View.OnClickListener {
         imgurl.add("http://p1.music.126.net/rqD3v-74jAkxLzwz22P0zA==/109951164137397341.jpg");
         host_bvp.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         host_bvp.setBannerAnimation(Transformer.Default);
-
         host_bvp.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
@@ -125,7 +124,7 @@ public class HostFragment extends BaseFragment implements View.OnClickListener {
         host_bvp.setIndicatorGravity(BannerConfig.CENTER);
         host_bvp.start();
     }
-
+/*广场popwindow*/
     public void songsSquare() {
         View view1 = LayoutInflater.from(activity).inflate(R.layout.poplayout, null, false);
         PopupWindow popupWindow = new PopupWindow(activity);
@@ -135,9 +134,10 @@ public class HostFragment extends BaseFragment implements View.OnClickListener {
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(false);
+        ColorDrawable cd = new ColorDrawable(0xffffff);
+        popupWindow.setBackgroundDrawable(cd);
 
-
-        popupWindow.showAtLocation(guanchan, Gravity.TOP, (int)guanchan.getX(), (int)guanchan.getY());
+      popupWindow.showAsDropDown(guanchan);
 
     }
 
