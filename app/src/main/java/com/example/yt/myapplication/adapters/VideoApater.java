@@ -11,17 +11,17 @@ import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.example.yt.myapplication.R;
-import com.example.yt.myapplication.entitys.VideoBean;
+import com.example.yt.myapplication.entitys.Video_Bean;
 
 import java.util.List;
 
 public class VideoApater extends BaseAdapter {
     private  View view;
-    List<VideoBean> videoBeans;
+    List<Video_Bean> videoBeans;
     private Context context;
     LayoutInflater linearLayout;
 
-    public VideoApater(List<VideoBean> videoBeans, Context context) {
+    public VideoApater(List<Video_Bean> videoBeans, Context context) {
         this.videoBeans = videoBeans;
         this.context = context;
         linearLayout = LayoutInflater.from(context);

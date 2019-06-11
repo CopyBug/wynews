@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.example.yt.myapplication.until.OffenUntil;
+import com.example.yt.myapplication.until.OfenUntil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +18,7 @@ public class GuideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OffenUntil.CancelActionBar(this);
+        OfenUntil.CancelActionBar(this);
         setContentView(R.layout.activity_guide);
         initView();
 
@@ -30,9 +30,16 @@ public class GuideActivity extends AppCompatActivity {
         TimerTask timerTask=new TimerTask() {
             @Override
             public void run() {
-                Intent intent=new Intent(GuideActivity.this,SickMusic.class);
-                startActivity(intent);
-                GuideActivity.this.finish();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent=new Intent(GuideActivity.this,SickMusic.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.inmovement,R.anim.movement);
+                        finish();
+                    }
+                });
+
             }
         };
         timer.schedule(timerTask,1000);

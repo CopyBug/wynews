@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.yt.myapplication.R;
-import com.example.yt.myapplication.entitys.VideoBean;
+import com.example.yt.myapplication.entitys.Video_Bean;
 
 import java.util.List;
 
 public class VideoFragment extends BaseFragment {
     private ListView listview;
-    private List<VideoBean> sp;
+    private List<Video_Bean> sp;
 
 
 
@@ -37,7 +37,7 @@ public class VideoFragment extends BaseFragment {
     }
 
     public void AddShiping(String videourl, String tv, String imgurl) {
-        VideoBean videoBean=new VideoBean(videourl,tv,imgurl);
+        Video_Bean videoBean=new Video_Bean(videourl,tv,imgurl);
         sp.add(videoBean);
 
     }

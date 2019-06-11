@@ -6,5 +6,6 @@
     <color name="coloricon">#FD3B32</color>
     <color name="colorbg">#ffffff</color>
     <color name="colortv">#000000</color>
-
+    <color name="text_color">#FF000000</color>
+    <color name="small_font">#FF757575</color>
 </resources>

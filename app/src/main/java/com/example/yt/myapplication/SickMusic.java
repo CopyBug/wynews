@@ -37,26 +37,21 @@ public class SickMusic extends AppCompatActivity
     private TextView headerUser;
     private TextView headerPifu;
     private TextView headerVoice;
-
+    private ViewPager contentVp;
+    private TabLayout barTl;
     private List<String> title = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ImageView playStatus;
+    private ImageView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick_music);
-        initView();
         initlayout();
     }
-
-    private ViewPager contentVp;
-
-
-    private TabLayout barTl;
-
 
     private void initlayout() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,6 +73,31 @@ public class SickMusic extends AppCompatActivity
         headerVoice = (TextView) findViewById(R.id.header_voice);
         contentVp = (ViewPager) findViewById(R.id.content_vp);
         barTl = (TabLayout) findViewById(R.id.bar_tl);
+        playStatus = (ImageView) findViewById(R.id.playStatus);
+        search = (ImageView) findViewById(R.id.search);
+        playStatus = findViewById(R.id.playStatus);
+        StartMusic();
+        initfragment();
+        playStatusclick();
+
+    }
+
+    private void playStatusclick() {
+        playStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
+                if (b) {
+                    playStatus.setImageResource(R.mipmap.icon_stop);
+                } else {
+                    playStatus.setImageResource(R.mipmap.icon_start);
+                }
+            }
+        });
+    }
+
+    private void initfragment() {
         AddFragment(new HostFragment(), "主页");
         AddFragment(new MyselfFragment(), "我的");
         AddFragment(new SearchFragment(), "发现");
@@ -86,24 +106,9 @@ public class SickMusic extends AppCompatActivity
         contentVp.setAdapter(fragmentViewpageAdapter);
         contentVp.setOffscreenPageLimit(5);
         barTl.setupWithViewPager(contentVp);
-        playStatus=findViewById(R.id.playStatus);
-        StartMusic();
-        playStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
-                if(b){
-                    playStatus.setImageResource(R.mipmap.icon_stop);
-                }else{
-                    playStatus.setImageResource(R.mipmap.icon_start);
-                }
-            }
-        });
     }
-    public void StartMusic(){
 
-    }
+
 
 
     public void AddFragment(Fragment fragment, String title) {
@@ -125,8 +130,8 @@ public class SickMusic extends AppCompatActivity
         }
         return false;
     }
+    public void StartMusic() {
 
-    private void initView() {
-        playStatus = (ImageView) findViewById(R.id.playStatus);
     }
+
 }
