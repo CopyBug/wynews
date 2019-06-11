@@ -40,7 +40,7 @@ dependencies {
     //最新版本
     implementation 'org.jsoup:jsoup:1.12.1'
     // https://mvnrepository.com/artifact/org.json/json
-    implementation files('build/lib/httpclient-4.0.1.jar')
+
     implementation 'com.solidfire.code.gson:gson:2.6.2'
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
     implementation 'com.facebook.fresco:fresco:0.9.0'
