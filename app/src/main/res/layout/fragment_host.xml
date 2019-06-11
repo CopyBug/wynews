@@ -183,13 +183,14 @@
                <Button
                    android:id="@+id/guanchan"
                    android:textColor="#000000"
-                   android:background="@drawable/host_bk"
+                   android:background="@drawable/press_select"
                    android:layout_width="wrap_content"
                    android:layout_height="30dp"
                    android:layout_alignParentRight="true"
                    android:text="歌单广场"/>
            </RelativeLayout>
            <com.example.yt.myapplication.views.MessureGridview
+               android:layout_marginBottom="30dp"
                android:horizontalSpacing="20dp"
                android:verticalSpacing="20dp"
                android:id="@+id/host_gv"
