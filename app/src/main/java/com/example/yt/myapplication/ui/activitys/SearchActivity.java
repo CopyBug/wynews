@@ -1,5 +1,6 @@
 package com.example.yt.myapplication.ui.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.example.yt.myapplication.adapters.ActivitySearchPopItemAdapter;
 import com.example.yt.myapplication.adapters.ActivitySearchry_adapter;
 import com.example.yt.myapplication.entitys.HistoryRecord_Bean;
 import com.example.yt.myapplication.entitys.MusicSong_bean;
+import com.example.yt.myapplication.server.MusicServer;
 import com.example.yt.myapplication.until.NetworkListining;
 import com.example.yt.myapplication.until.OfenUntil;
 import com.example.yt.myapplication.until.OkhttpUntil;
@@ -123,6 +125,9 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     OfenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
                     AddHistory();
+                    Intent intent = new Intent(SearchActivity.this, MusicServer.class);
+                    intent.putExtra("mp3",listbean.get(position).getMusicurl());
+                    startService(intent);
                 }
             }
         });
