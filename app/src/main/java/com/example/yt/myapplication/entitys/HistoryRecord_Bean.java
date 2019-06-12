@@ -4,6 +4,17 @@ public class HistoryRecord_Bean {
     private String song_name;
     private String searchTime;
 
+    @Override
+    public boolean equals(Object obj) {
+
+        return ((HistoryRecord_Bean)obj).getSong_name().equals(song_name);
+    }
+
+    @Override
+    public int hashCode() {
+        return song_name.hashCode();
+    }
+
     public String getSong_name() {
         return song_name;
     }

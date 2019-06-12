@@ -1,7 +1,9 @@
 package com.example.yt.myapplication.until;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.example.yt.myapplication.R;
+import com.google.gson.Gson;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,16 +38,36 @@ public class OfenUntil {
         window.setStatusBarColor(Color.parseColor(colors));
     }
     /*pop*/
-    public void searchRelated(Activity activity,String usertv, View view, String  bgcolor, View location){
+    public static PopupWindow searchRelated(Activity activity, View view, String  bgcolor, View location){
         PopupWindow popupWindow = new PopupWindow(activity);
         popupWindow.setContentView(view);
         popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(false);
-        ColorDrawable cd = new ColorDrawable(Color.parseColor("bgcolor"));
+        ColorDrawable cd = new ColorDrawable(Color.parseColor(bgcolor));
         popupWindow.setBackgroundDrawable(cd);
         popupWindow.showAsDropDown(location);
-
+        return popupWindow;
     }
+    public static void Dispop(PopupWindow popupWindow){
+        popupWindow.dismiss();
+    }
+    public static void StorageSharep(Activity activity,String name,String key,String value){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putString(key,value);
+        edit.commit();
+    }
+    public static String SelectSharep(Activity activity,String name,String key){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(name, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, null);
+    }
+
+    public static <T>T SelectSharep(Activity activity,String name,String key,Class<T> myclass){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(name, Context.MODE_PRIVATE);
+        String string = sharedPreferences.getString(key, null);
+        return string==null?null:new Gson().fromJson(string,myclass);
+    }
+
 }

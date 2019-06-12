@@ -126,7 +126,7 @@ public class HostFragment extends BaseFragment implements View.OnClickListener {
     }
 /*广场popwindow*/
     public void songsSquare() {
-        View view1 = LayoutInflater.from(activity).inflate(R.layout.poplayout, null, false);
+        View view1 = LayoutInflater.from(activity).inflate(R.layout.fragment_host_poplayout, null, false);
         PopupWindow popupWindow = new PopupWindow(activity);
         popupWindow.setContentView(view1);
 
