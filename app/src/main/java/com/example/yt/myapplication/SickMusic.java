@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yt.myapplication.adapters.FragmentViewpageAdapter;
 import com.example.yt.myapplication.ui.activitys.SearchActivity;
@@ -89,17 +90,19 @@ public class SickMusic extends AppCompatActivity
         });
 
     }
-
+private static boolean startmusic=true;
     private void playStatusclick() {
         playStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
-                if (b) {
+              //  boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
+                if (startmusic) {
                     playStatus.setImageResource(R.mipmap.icon_stop);
+                    startmusic=false;
                 } else {
                     playStatus.setImageResource(R.mipmap.icon_start);
+                    startmusic=true;
                 }
             }
         });

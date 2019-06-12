@@ -25,7 +25,7 @@ public class VideoApater extends BaseAdapter {
         this.videoBeans = videoBeans;
         this.context = context;
         linearLayout = LayoutInflater.from(context);
-        view = linearLayout.inflate(R.layout.video_item, null, false);
+
     }
 
     @Override
@@ -48,7 +48,7 @@ public class VideoApater extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if(view==null){
-            this.view=view;
+            view=linearLayout.inflate(R.layout.fragment_video_item, viewGroup, false);
             viewHolder=new ViewHolder(view);
             view.setTag(viewHolder);
         }else {
