@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class HostGvAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.host_gv, null);
+            convertView = layoutInflater.inflate(R.layout.fragment_host_gv, null);
             convertView.setTag(new ViewHolder(convertView));
         }
         initializeViews((TuijianGedan_bean)getItem(position), (ViewHolder) convertView.getTag());
