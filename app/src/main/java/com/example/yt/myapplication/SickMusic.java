@@ -17,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yt.myapplication.adapters.FragmentViewpageAdapter;
+import com.example.yt.myapplication.ui.activitys.SearchActivity;
 import com.example.yt.myapplication.ui.fragments.HostFragment;
 import com.example.yt.myapplication.ui.fragments.MyselfFragment;
 import com.example.yt.myapplication.ui.fragments.SearchFragment;
 import com.example.yt.myapplication.ui.fragments.VideoFragment;
+import com.example.yt.myapplication.until.OfenUntil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +81,12 @@ public class SickMusic extends AppCompatActivity
         StartMusic();
         initfragment();
         playStatusclick();
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OfenUntil.JumpActivity(SickMusic.this, SearchActivity.class);
+            }
+        });
 
     }
 

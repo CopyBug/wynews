@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="50dp">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <LinearLayout
+           android:paddingLeft="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+           <TextView
+            style="@style/searchTextStyle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="搜索"/>
+           <TextView
+               android:id="@+id/usertv"
+               android:paddingLeft="5dp"
+               style="@style/searchTextStyle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="123"/>
+       </LinearLayout>
+       <ListView
+           android:id="@+id/activity_search_poplv"
+           android:paddingLeft="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+   </LinearLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>

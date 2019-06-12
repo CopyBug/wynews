@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorbg"
+    android:layout_height="match_parent"
+    tools:context=".ui.activitys.SearchActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical
+"
+        android:layout_height="60dp">
+        <ImageView
+            android:onClick="Finish"
+            android:id="@+id/activity_search_up"
+            android:rotation="-90"
+            android:scaleType="centerInside"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/icon_return"/>
+        <EditText
+            android:id="@+id/activity_search_son"
+            android:textSize="15dp"
+            android:hint="要搜索的歌"
+            android:layout_width="0dp"
+
+            android:layout_weight="1"
+            android:layout_height="45dp" />
+        <ImageView
+            android:onClick="DeletText"
+            android:id="@+id/activity_search_delete"
+            android:visibility="invisible"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/icon_delete"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/normaltextf"
+            android:text="历史记录"/>
+        <ImageView
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_trashcan"/>
+    </RelativeLayout>
+    <com.example.yt.myapplication.views.MessureRecyclerView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/activity_search_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/normaltextf"
+        android:text="热搜榜"/>
+    <com.example.yt.myapplication.views.MessureListview
+        android:id="@+id/activity_search_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+</ScrollView>
