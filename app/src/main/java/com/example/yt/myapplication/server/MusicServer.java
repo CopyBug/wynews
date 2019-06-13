@@ -16,10 +16,10 @@ import com.example.yt.myapplication.until.MusicServerListining;
 public class MusicServer extends Service {
     MediaPlayer mediaPlayer;
     MusicSong_bean.ListbeanBean listbeanBean;
-    MusicServerListining musicServerListining;
+   public static MusicServerListining musicServerListining;
 
-    public void setMusicServerListining(MusicServerListining musicServerListining) {
-        this.musicServerListining = musicServerListining;
+    public static void setMusicServerListining(MusicServerListining newmusicServerListining) {
+        musicServerListining=newmusicServerListining;
     }
 
     public MusicServer() {
@@ -35,6 +35,7 @@ public class MusicServer extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle music = intent.getBundleExtra("music");
+
         listbeanBean=(MusicSong_bean.ListbeanBean) music.getSerializable("mp3");
         try {
 
@@ -47,7 +48,7 @@ public class MusicServer extends Service {
               @Override
               public void onPrepared(MediaPlayer mp) {
                   if(musicServerListining!=null){
-                      musicServerListining.Startinfo(mediaPlayer,listbeanBean.getSonname(),duration);
+                      musicServerListining.Startinfo(mp,listbeanBean.getSonname(),duration);
                   }
 
               }
@@ -56,7 +57,7 @@ public class MusicServer extends Service {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     if(musicServerListining!=null){
-                        musicServerListining.Stopinfo(mediaPlayer,listbeanBean.getSonname());
+                        musicServerListining.Stopinfo(mp,listbeanBean.getSonname());
                     }
                 }
             });

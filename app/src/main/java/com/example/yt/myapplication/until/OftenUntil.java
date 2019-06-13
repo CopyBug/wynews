@@ -89,9 +89,10 @@ public class OftenUntil {
     }
     public static void StartServer(Activity activity, Class myclass,String intentkey, String bundlekey, MusicSong_bean.ListbeanBean bean){
         Intent intent = initintent(activity, myclass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         Bundle bundle=new Bundle();
-        bundle.putSerializable(intentkey,bean);
-        intent.putExtra(bundlekey,bundle);
+        bundle.putSerializable(bundlekey,bean);
+        intent.putExtra(intentkey,bundle);
         activity.startService(intent);
     }
 }

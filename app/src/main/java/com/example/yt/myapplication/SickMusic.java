@@ -1,5 +1,6 @@
 package com.example.yt.myapplication;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yt.myapplication.adapters.FragmentViewpageAdapter;
+import com.example.yt.myapplication.server.MusicServer;
 import com.example.yt.myapplication.ui.activitys.SearchActivity;
 import com.example.yt.myapplication.ui.fragments.HostFragment;
 import com.example.yt.myapplication.ui.fragments.MyselfFragment;
 import com.example.yt.myapplication.ui.fragments.SearchFragment;
 import com.example.yt.myapplication.ui.fragments.VideoFragment;
+import com.example.yt.myapplication.until.MusicServerListining;
 import com.example.yt.myapplication.until.OftenUntil;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SickMusic extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MusicServerListining {
     private CircleImageView imageView;
     private TextView headerUsername;
     private Button headerQiandao;
@@ -47,12 +50,15 @@ public class SickMusic extends AppCompatActivity
     private Toolbar toolbar;
     private ImageView playStatus;
     private ImageView search;
+    private TextView songname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick_music);
+
         initlayout();
+        MusicServer.setMusicServerListining(this);
     }
 
     private void initlayout() {
@@ -78,7 +84,7 @@ public class SickMusic extends AppCompatActivity
         playStatus = (ImageView) findViewById(R.id.playStatus);
         search = (ImageView) findViewById(R.id.search);
         playStatus = findViewById(R.id.playStatus);
-
+        songname = (TextView) findViewById(R.id.songname);
         initfragment();
         playStatusclick();
         search.setOnClickListener(new View.OnClickListener() {
@@ -89,19 +95,27 @@ public class SickMusic extends AppCompatActivity
         });
 
     }
-private static boolean startmusic=true;
+
+    private static boolean startmusic = true;
+
     private void playStatusclick() {
         playStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-              //  boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
+                //  boolean b = playStatus.getDrawable().getConstantState().equals(getResources().getDrawable(R.mipmap.icon_start).getConstantState());
                 if (startmusic) {
-                    playStatus.setImageResource(R.mipmap.icon_stop);
-                    startmusic=false;
-                } else {
                     playStatus.setImageResource(R.mipmap.icon_start);
-                    startmusic=true;
+                    startmusic = false;
+                    if (mediaPlayer != null) {
+                        mediaPlayer.pause();
+                    }
+                } else {
+                    playStatus.setImageResource(R.mipmap.icon_stop);
+                    startmusic = true;
+                    if (mediaPlayer != null) {
+                        mediaPlayer.start();
+                    }
                 }
             }
         });
@@ -119,12 +133,11 @@ private static boolean startmusic=true;
     }
 
 
-
-
     public void AddFragment(Fragment fragment, String title) {
         fragments.add(fragment);
         this.title.add(title);
     }
+
 
     @Override
     public void setContentView(View view) {
@@ -140,5 +153,26 @@ private static boolean startmusic=true;
         }
         return false;
     }
+
+    static MediaPlayer mediaPlayer;
+
+    /*已经播放*/
+    @Override
+    public void Startinfo(MediaPlayer newmediaPlayer, String songname, int songtime) {
+        playStatus.setImageResource(R.mipmap.icon_stop);
+        startmusic = true;
+        mediaPlayer = newmediaPlayer;
+        this.songname.setText(songname);
+    }
+
+    /*播放完毕*/
+    @Override
+    public void Stopinfo(MediaPlayer mediaPlayer, String songname) {
+
+    }
+
+
+    /*音乐Server监听*/
+
 
 }

@@ -129,10 +129,8 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
                     OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
                     AddHistory();
                     OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
-                    Map<String,String> maps=new HashMap<>();
-                    maps.put("mp3",listbean.get(position).getMusicurl());
-                    maps.put("musicid",listbean.get(position).getSonid());
-                    OftenUntil.StartServer(SearchActivity.this,MusicServer.class,maps);
+                    OftenUntil.StartServer(SearchActivity.this,MusicServer.class,"music","mp3",listbean.get(position));
+                    onBackPressed();
                 }
             }
         });
