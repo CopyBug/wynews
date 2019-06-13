@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
                     String format = simpleDateFormat.format(new Date());
 
-                    History history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
+                     History history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
                     if(history==null){
                         Set<HistoryRecord_Bean>  historyRecord_beans=new HashSet<>();
                         historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
@@ -126,10 +126,16 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
                         historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
                     }
 
-                    OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
-                    AddHistory();
-                    OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
-                    OftenUntil.StartServer(SearchActivity.this,MusicServer.class,"music","mp3",listbean.get(position));
+                    History finalHistory = history;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(finalHistory));
+                            AddHistory();
+                            OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
+                            OftenUntil.StartServer(SearchActivity.this,MusicServer.class,"music","mp3",listbean.get(position));
+                        }
+                    }).start();
                     onBackPressed();
                 }
             }
