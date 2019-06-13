@@ -34,6 +34,7 @@
         <activity
             android:name=".SickMusic"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activitys.MusicWebMusic" />
     </application>
 
 </manifest>

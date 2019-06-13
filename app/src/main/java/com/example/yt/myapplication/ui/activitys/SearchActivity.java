@@ -59,6 +59,7 @@ public class SearchActivity extends AppCompatActivity {
         /*设置状态栏颜色*/
         OfenUntil.ChangestatusBar(this, "#B7B7B7");
         setContentView(R.layout.activity_search);
+
         initView();
 
     }
@@ -111,9 +112,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(popupWindow!=null&&listbean!=null){
+                    OfenUntil.Dispop(popupWindow);
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
                     String format = simpleDateFormat.format(new Date());
-                    OfenUntil.Dispop(popupWindow);
+
                     History history = OfenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
                     if(history==null){
                         Set<HistoryRecord_Bean>  historyRecord_beans=new HashSet<>();
@@ -127,6 +129,9 @@ public class SearchActivity extends AppCompatActivity {
                     AddHistory();
                     Intent intent = new Intent(SearchActivity.this, MusicServer.class);
                     intent.putExtra("mp3",listbean.get(position).getMusicurl());
+                    intent.putExtra("musicid",listbean.get(position).getSonid());
+
+                    stopService(intent);
                     startService(intent);
                 }
             }
