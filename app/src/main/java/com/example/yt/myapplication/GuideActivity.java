@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.example.yt.myapplication.until.OfenUntil;
+import com.example.yt.myapplication.until.OftenUntil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +18,7 @@ public class GuideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OfenUntil.CancelActionBar(this);
+        OftenUntil.CancelActionBar(this);
         setContentView(R.layout.activity_guide);
         initView();
 

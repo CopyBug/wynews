@@ -1,6 +1,5 @@
 package com.example.yt.myapplication.ui.activitys;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +22,9 @@ import com.example.yt.myapplication.adapters.ActivitySearchry_adapter;
 import com.example.yt.myapplication.entitys.HistoryRecord_Bean;
 import com.example.yt.myapplication.entitys.MusicSong_bean;
 import com.example.yt.myapplication.server.MusicServer;
+import com.example.yt.myapplication.until.ItemHistorylisting;
 import com.example.yt.myapplication.until.NetworkListining;
-import com.example.yt.myapplication.until.OfenUntil;
+import com.example.yt.myapplication.until.OftenUntil;
 import com.example.yt.myapplication.until.OkhttpUntil;
 import com.example.yt.myapplication.views.MessureListview;
 import com.example.yt.myapplication.views.MessureRecyclerView;
@@ -32,14 +32,14 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.SimpleFormatter;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements ItemHistorylisting {
 
     private ImageView activity_search_up;
     private EditText activity_search_son;
@@ -57,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /*设置状态栏颜色*/
-        OfenUntil.ChangestatusBar(this, "#B7B7B7");
+        OftenUntil.ChangestatusBar(this, "#B7B7B7");
         setContentView(R.layout.activity_search);
 
         initView();
@@ -94,12 +94,12 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String sonhead = activity_search_son.getText() + "".trim();
                 if(!sonhead.equals("")){
-                    popupWindow = OfenUntil.searchRelated(SearchActivity.this, initpop(sonhead), "#FFFFFF", activity_search_son);
+                    popupWindow = OftenUntil.searchRelated(SearchActivity.this, initpop(sonhead), "#FFFFFF", activity_search_son);
                     GetSons(sonhead);
 
                 }else{
                     if(popupWindow!=null){
-                        OfenUntil.Dispop(popupWindow);
+                        OftenUntil.Dispop(popupWindow);
                     }
                 }
 
@@ -112,11 +112,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(popupWindow!=null&&listbean!=null){
-                    OfenUntil.Dispop(popupWindow);
+                    OftenUntil.Dispop(popupWindow);
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
                     String format = simpleDateFormat.format(new Date());
 
-                    History history = OfenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
+                    History history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
                     if(history==null){
                         Set<HistoryRecord_Bean>  historyRecord_beans=new HashSet<>();
                         historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
@@ -125,14 +125,14 @@ public class SearchActivity extends AppCompatActivity {
                         Set<HistoryRecord_Bean> historyRecord_beans = history.getHistoryRecord_beans();
                         historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
                     }
-                    OfenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
-                    AddHistory();
-                    Intent intent = new Intent(SearchActivity.this, MusicServer.class);
-                    intent.putExtra("mp3",listbean.get(position).getMusicurl());
-                    intent.putExtra("musicid",listbean.get(position).getSonid());
 
-                    stopService(intent);
-                    startService(intent);
+                    OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
+                    AddHistory();
+                    OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
+                    Map<String,String> maps=new HashMap<>();
+                    maps.put("mp3",listbean.get(position).getMusicurl());
+                    maps.put("musicid",listbean.get(position).getSonid());
+                    OftenUntil.StartServer(SearchActivity.this,MusicServer.class,maps);
                 }
             }
         });
@@ -159,7 +159,7 @@ public class SearchActivity extends AppCompatActivity {
     /*更新历史记录*/
     public void AddHistory(){
         historyRecord_beans.clear();
-        History history = OfenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
+        History history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
         if(history!=null){
            List<HistoryRecord_Bean> beans=new ArrayList<>( history.getHistoryRecord_beans());
             for (int i = 0; i < beans.size(); i++) {
@@ -173,7 +173,7 @@ public class SearchActivity extends AppCompatActivity {
     }
     /*获取歌*/
     public void GetSons(String head){
-        OkhttpUntil.enqueueGetrequest("http://192.168.1.205:12301/StudentP/SELECTHeadmusic?musichead=" + head, MusicSong_bean.class, new NetworkListining<MusicSong_bean>() {
+        OkhttpUntil.enqueueGetrequest("http://121.9.253.237:8888/StudentP/SELECTHeadmusic?musichead=" + head, MusicSong_bean.class, new NetworkListining<MusicSong_bean>() {
             @Override
             public void BackResultSuccess(MusicSong_bean bean, int code) {
                 try{
@@ -217,9 +217,15 @@ public class SearchActivity extends AppCompatActivity {
     }
     /*删除历史记录*/
     public void DelethistoryRecord(View view){
-        OfenUntil.StorageSharep(this,"lhw","history",null);
+        OftenUntil.StorageSharep(this,"lhw","history",null);
         AddHistory();
     }
+    /*历史记录点击事件*/
+    @Override
+    public void startclick(int position, HistoryRecord_Bean bean) {
+
+    }
+
     public class History{
         Set<HistoryRecord_Bean> historyRecord_beans=new HashSet<>();
 

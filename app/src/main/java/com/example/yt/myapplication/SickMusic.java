@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yt.myapplication.adapters.FragmentViewpageAdapter;
 import com.example.yt.myapplication.ui.activitys.SearchActivity;
@@ -23,7 +22,7 @@ import com.example.yt.myapplication.ui.fragments.HostFragment;
 import com.example.yt.myapplication.ui.fragments.MyselfFragment;
 import com.example.yt.myapplication.ui.fragments.SearchFragment;
 import com.example.yt.myapplication.ui.fragments.VideoFragment;
-import com.example.yt.myapplication.until.OfenUntil;
+import com.example.yt.myapplication.until.OftenUntil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,13 +78,13 @@ public class SickMusic extends AppCompatActivity
         playStatus = (ImageView) findViewById(R.id.playStatus);
         search = (ImageView) findViewById(R.id.search);
         playStatus = findViewById(R.id.playStatus);
-        StartMusic();
+
         initfragment();
         playStatusclick();
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OfenUntil.JumpActivity(SickMusic.this, SearchActivity.class);
+                OftenUntil.JumpActivity(SickMusic.this, SearchActivity.class);
             }
         });
 
@@ -140,9 +139,6 @@ private static boolean startmusic=true;
                 break;
         }
         return false;
-    }
-    public void StartMusic() {
-
     }
 
 }

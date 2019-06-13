@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -13,12 +14,15 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.example.yt.myapplication.R;
+import com.example.yt.myapplication.entitys.MusicSong_bean;
+import com.example.yt.myapplication.server.MusicServer;
+import com.example.yt.myapplication.ui.activitys.SearchActivity;
 import com.google.gson.Gson;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class OfenUntil {
+public class OftenUntil {
     public static void CancelActionBar(Activity activity){
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -69,5 +73,25 @@ public class OfenUntil {
         String string = sharedPreferences.getString(key, null);
         return string==null?null:new Gson().fromJson(string,myclass);
     }
+    public static Intent initintent(Activity activity,Class myclass){
+        return new Intent(activity, myclass);
+    }
+    public static void  StopServerr(Activity activity,Class myclass){
+        activity.stopService(initintent(activity,myclass));
 
+    }
+    public static void StartServer(Activity activity,Class myclass,Map<String,String> map){
+        Intent intent = initintent(activity, myclass);
+        for (Map.Entry<String,String> maps:map.entrySet()){
+            intent.putExtra(maps.getKey(),maps.getValue());
+        }
+        activity.startService(intent);
+    }
+    public static void StartServer(Activity activity, Class myclass,String intentkey, String bundlekey, MusicSong_bean.ListbeanBean bean){
+        Intent intent = initintent(activity, myclass);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable(intentkey,bean);
+        intent.putExtra(bundlekey,bundle);
+        activity.startService(intent);
+    }
 }

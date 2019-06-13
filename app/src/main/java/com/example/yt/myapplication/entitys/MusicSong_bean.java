@@ -1,8 +1,9 @@
 package com.example.yt.myapplication.entitys;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MusicSong_bean {
+public class MusicSong_bean implements Serializable {
     /**
      * result : true
      * errow : Success
@@ -47,7 +48,7 @@ public class MusicSong_bean {
         this.listbean = listbean;
     }
 
-    public static class ListbeanBean {
+    public static class ListbeanBean implements Serializable {
         /**
          * sonname : 说爱你（吉他男声版）（Cover：沈以诚）
          * sonid : 1331983202
