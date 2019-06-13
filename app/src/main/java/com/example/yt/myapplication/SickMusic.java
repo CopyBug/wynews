@@ -168,7 +168,9 @@ public class SickMusic extends AppCompatActivity
     /*播放完毕*/
     @Override
     public void Stopinfo(MediaPlayer mediaPlayer, String songname) {
-
+        playStatus.setImageResource(R.mipmap.icon_stop);
+        startmusic = false;
+        this.songname.setText("暂无音乐");
     }
 
 

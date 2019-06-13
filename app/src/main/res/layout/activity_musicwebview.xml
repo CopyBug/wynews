@@ -9,7 +9,7 @@
 <WebView
     android:id="@+id/musicwebview"
     android:layout_width="fill_parent"
-    android:layerType="software"
+
 
     android:layout_height="fill_parent"></WebView>
 </LinearLayout>

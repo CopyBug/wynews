@@ -53,6 +53,7 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
     private PopupWindow popupWindow;
     private ListView activity_search_poplv;
     List<MusicSong_bean.ListbeanBean> listbean ;
+    History history ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,26 +117,33 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
                     String format = simpleDateFormat.format(new Date());
 
-                     History history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
-                    if(history==null){
-                        Set<HistoryRecord_Bean>  historyRecord_beans=new HashSet<>();
-                        historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
-                        history=new History(historyRecord_beans);
-                    }else{
-                        Set<HistoryRecord_Bean> historyRecord_beans = history.getHistoryRecord_beans();
-                        historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
-                    }
+                       history = OftenUntil.SelectSharep(SearchActivity.this, "lhw", "history", History.class);
+                   new Thread(new Runnable() {
+                       @Override
+                       public void run() {
+                           if(history==null){
+                               Set<HistoryRecord_Bean>  historyRecord_beans=new HashSet<>();
+                               historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
+                               history=new History(historyRecord_beans);
+                           }else{
+                               Set<HistoryRecord_Bean> historyRecord_beans = history.getHistoryRecord_beans();
+                               historyRecord_beans.add(new HistoryRecord_Bean(listbean.get(position).getSonname(),format));
+                           }
 
-                    History finalHistory = history;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(finalHistory));
-                            AddHistory();
-                            OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
-                            OftenUntil.StartServer(SearchActivity.this,MusicServer.class,"music","mp3",listbean.get(position));
-                        }
-                    }).start();
+                           OftenUntil.StorageSharep(SearchActivity.this,"lhw","history",new Gson().toJson(history));
+                           OftenUntil.StopServerr(SearchActivity.this, MusicServer.class);
+                           OftenUntil.StartServer(SearchActivity.this,MusicServer.class,"music","mp3",listbean.get(position));
+
+                           runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                   AddHistory();
+                               }
+                           });
+
+                       }
+                   }).start();
+
                     onBackPressed();
                 }
             }

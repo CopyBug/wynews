@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.Map;
 
 public class OftenUntil {
+    public static Handler handler=new Handler();
     public static void CancelActionBar(Activity activity){
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -81,18 +83,28 @@ public class OftenUntil {
 
     }
     public static void StartServer(Activity activity,Class myclass,Map<String,String> map){
-        Intent intent = initintent(activity, myclass);
-        for (Map.Entry<String,String> maps:map.entrySet()){
-            intent.putExtra(maps.getKey(),maps.getValue());
-        }
-        activity.startService(intent);
+       handler.post(new Runnable() {
+           @Override
+           public void run() {
+               Intent intent = initintent(activity, myclass);
+               for (Map.Entry<String,String> maps:map.entrySet()){
+                   intent.putExtra(maps.getKey(),maps.getValue());
+               }
+               activity.startService(intent);
+           }
+       });
     }
     public static void StartServer(Activity activity, Class myclass,String intentkey, String bundlekey, MusicSong_bean.ListbeanBean bean){
-        Intent intent = initintent(activity, myclass);
-        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable(bundlekey,bean);
-        intent.putExtra(intentkey,bundle);
-        activity.startService(intent);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = initintent(activity, myclass);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable(bundlekey,bean);
+                intent.putExtra(intentkey,bundle);
+                activity.startService(intent);
+            }
+        });
     }
 }
