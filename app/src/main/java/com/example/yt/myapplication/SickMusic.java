@@ -1,5 +1,6 @@
 package com.example.yt.myapplication;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yt.myapplication.adapters.FragmentViewpageAdapter;
+import com.example.yt.myapplication.entitys.Userinfo;
 import com.example.yt.myapplication.server.MusicServer;
+import com.example.yt.myapplication.ui.activitys.LoginActivity;
+import com.example.yt.myapplication.ui.activitys.NeswActivity;
 import com.example.yt.myapplication.ui.activitys.SearchActivity;
 import com.example.yt.myapplication.ui.fragments.HostFragment;
 import com.example.yt.myapplication.ui.fragments.MyselfFragment;
@@ -56,7 +60,6 @@ public class SickMusic extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick_music);
-
         initlayout();
         MusicServer.setMusicServerListining(this);
     }
@@ -72,7 +75,9 @@ public class SickMusic extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         imageView = (CircleImageView) findViewById(R.id.imageView);
-        headerUsername = (TextView) findViewById(R.id.header_username);
+        View headerView = navigationView.getHeaderView(0);
+        headerUsername= headerView.findViewById(R.id.header_username);
+
         headerQiandao = (Button) findViewById(R.id.header_qiandao);
         headerLeague = (TextView) findViewById(R.id.header_league);
         headerMessage = (TextView) findViewById(R.id.header_message);
@@ -93,6 +98,20 @@ public class SickMusic extends AppCompatActivity
                 OftenUntil.JumpActivity(SickMusic.this, SearchActivity.class);
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        headerUsername.setText(LoginActivity.userinfo.getStudent_id());
+
+        if(LoginActivity.userinfo!=null){
+            if(!LoginActivity.userinfo.getStudent_id().equals("")){
+                headerUsername.setText(LoginActivity.userinfo.getStudent_id());
+            }
+
+        }
 
     }
 
@@ -147,8 +166,8 @@ public class SickMusic extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getTitle() + "") {
-            case "夜间模式":
-
+            case "新闻":
+                startActivity(new Intent(SickMusic.this, NeswActivity.class));
                 break;
         }
         return false;
@@ -172,7 +191,9 @@ public class SickMusic extends AppCompatActivity
         startmusic = false;
         this.songname.setText("暂无音乐");
     }
-
+    public void Login(View view){
+        OftenUntil.JumpActivity(this, LoginActivity.class);
+    }
 
     /*音乐Server监听*/
 

@@ -48,12 +48,14 @@ public class OftenUntil {
         PopupWindow popupWindow = new PopupWindow(activity);
         popupWindow.setContentView(view);
         popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(700);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(false);
         ColorDrawable cd = new ColorDrawable(Color.parseColor(bgcolor));
         popupWindow.setBackgroundDrawable(cd);
         popupWindow.showAsDropDown(location);
+
+
         return popupWindow;
     }
     public static void Dispop(PopupWindow popupWindow){

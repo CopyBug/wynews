@@ -1,5 +1,7 @@
 package com.example.yt.myapplication.ui.activitys;
 
+import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +10,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,7 +65,7 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
         /*设置状态栏颜色*/
         OftenUntil.ChangestatusBar(this, "#B7B7B7");
         setContentView(R.layout.activity_search);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         initView();
 
     }
@@ -91,11 +96,17 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
                 }
             }
 
+            @SuppressLint("WrongConstant")
             @Override
             public void afterTextChanged(Editable s) {
                 String sonhead = activity_search_son.getText() + "".trim();
                 if(!sonhead.equals("")){
                     popupWindow = OftenUntil.searchRelated(SearchActivity.this, initpop(sonhead), "#FFFFFF", activity_search_son);
+                    //设置弹出窗体需要软键盘
+                    popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
+                    //设置模式，和Activity的一样，覆盖，调整大小
+                    popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
                     GetSons(sonhead);
 
                 }else{
@@ -225,6 +236,9 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
         popItemAdapter = new ActivitySearchPopItemAdapter(listbeanBeans, this);
         activity_search_poplv.setAdapter(popItemAdapter);
         addHistory();
+        /*View decorView = getWindow().getDecorView();
+        View contentView = findViewById(Window.ID_ANDROID_CONTENT);
+        decorView.getViewTreeObserver().addOnGlobalLayoutListener(getGlobalLayoutListener(decorView, contentView));*/
         return inflate;
     }
     /*删除历史记录*/
@@ -253,4 +267,28 @@ public class SearchActivity extends AppCompatActivity implements ItemHistorylist
             this.historyRecord_beans = historyRecord_beans;
         }
     }
+
+/*
+    private ViewTreeObserver.OnGlobalLayoutListener getGlobalLayoutListener(final View decorView, final View contentView) {
+        return new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                decorView.getWindowVisibleDisplayFrame(r);
+
+                int height = decorView.getContext().getResources().getDisplayMetrics().heightPixels;
+                int diff = height - r.bottom;
+
+                if (diff != 0) {
+                    if (contentView.getPaddingBottom() != diff) {
+                        contentView.setPadding(0, 0, 0, diff);
+                    }
+                } else {
+                    if (contentView.getPaddingBottom() != 0) {
+                        contentView.setPadding(0, 0, 0, 0);
+                    }
+                }
+            }
+        };
+    }*/
 }

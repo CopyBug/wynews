@@ -3,6 +3,15 @@ package com.example.yt.myapplication.entitys;
 public class HistoryRecord_Bean {
     private String song_name;
     private String searchTime;
+    private String musicurl;
+
+    public String getMusicurl() {
+        return musicurl;
+    }
+
+    public void setMusicurl(String musicurl) {
+        this.musicurl = musicurl;
+    }
 
     @Override
     public boolean equals(Object obj) {

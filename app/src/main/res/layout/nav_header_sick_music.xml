@@ -15,6 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:onClick="Login"
             android:paddingLeft="15dp"
             android:paddingTop="30dp"
             android:id="@+id/imageView"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
-                android:text="用户名"
+                android:text="未登录"
                 android:id="@+id/header_username"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
             <Button

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+<data>
+    <variable
+        name="Userinfo"
+        type="com.example.yt.myapplication.entitys.Userinfo" />
+    <variable
+        name="activity"
+        type="com.example.yt.myapplication.ui.activitys.LoginActivity" />
+</data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/coloricon">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_height="50dp"
+            android:background="@color/coloricon"
+            android:src="@mipmap/icon_login"/>
+        <LinearLayout
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <Button
+                android:onClick="StartLogin"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:background="@drawable/login_btnselect"
+                android:textColor="@color/coloricon"
+                android:text="@{Userinfo.msg}"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:background="@drawable/login_btnselect"
+                android:textColor="@color/coloricon"
+                android:text="立即体验"
+                android:onClick="Statrfelling"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
