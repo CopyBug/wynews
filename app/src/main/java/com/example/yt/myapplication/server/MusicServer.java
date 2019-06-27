@@ -64,7 +64,7 @@ public class MusicServer extends Service {
       }catch (Exception e){
         Intent dialogIntent = new Intent(getBaseContext(), MusicWebMusic.class);
           dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          dialogIntent.putExtra("musicurl",listbeanBean.getSonid());
+          dialogIntent.putExtra("musicurl","https://music.163.com/#/song?id="+listbeanBean.getSonid());
           getApplication().startActivity(dialogIntent);
       }
         return super.onStartCommand(intent, flags, startId);

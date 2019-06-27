@@ -15,14 +15,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.v4.view.ViewPager
-        android:background="@color/colorbg"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:id="@+id/content_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></android.support.v4.view.ViewPager>
+        android:background="@color/colorbg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"></android.support.v4.view.ViewPager>
 </LinearLayout>
 <RelativeLayout
     android:elevation="100dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@android:color/black"
-                android:text="男孩"/>
+                android:text="暂无歌曲"/>
             <TextView
                 android:id="@+id/songmenu"
                 android:layout_width="wrap_content"

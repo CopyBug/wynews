@@ -39,7 +39,7 @@ public class MusicWebMusic extends FragmentActivity {
         initWeb();
     }
     private void initWeb() {
-        web.loadUrl("https://music.163.com/#/song?id="+musicurl);
+        web.loadUrl(musicurl);
         mWebSettings = web.getSettings();
         mWebSettings.setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
         mWebSettings.setJavaScriptEnabled(true);//是否允许JavaScript脚本运行，默认为false。设置true时，会提醒可能造成XSS漏洞

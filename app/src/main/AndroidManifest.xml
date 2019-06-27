@@ -12,11 +12,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden">
+        <activity android:name=".ui.activitys.StartLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
+        <activity android:name=".ui.activitys.LoginActivity" />
+
         <service
             android:name=".server.MusicServer"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".ui.activitys.SearchActivity"
@@ -35,6 +41,7 @@
             android:name=".SickMusic"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activitys.MusicWebMusic" />
+        <activity android:name=".ui.activitys.NeswActivity" />
     </application>
 
 </manifest>
